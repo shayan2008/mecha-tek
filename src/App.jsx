@@ -1,14 +1,14 @@
 // Import images from src/assets
 import { lazy, Suspense, useState, useEffect } from 'react';
 import profile from './assets/profile-placeholder.png'
-import fira from './assets/fira-cup.jpg'
+import fira from './assets/Fira_ cup.jpg'
 import swimming from './assets/Swimming.jpg'
-import lineFollower from './assets/line-following-robot.jpg'
-import medport from './assets/medport-science-fair.jpg'
-import robocup from './assets/robocup-innovation.jpg'
-import ceta from './assets/ceta-robotics-competition.jpg'
+import lineFollower from './assets/Line following robot.jpg'
+import medport from './assets/Medport _ SienceFair.jpg'
+import robocup from './assets/Robocup_ invation.jpg'
+import ceta from './assets/CETA_Robotics Competition.jpg'
 import teleSwitch from './assets/tele_switch.jpg'
-import teleSwitchCircuit from './assets/tele-switch-circuit.jpg'
+import teleSwitchCircuit from './assets/Tele_Switch_Circuit.jpg'
 
 // Modern image component with lazy loading, blur-up effect, and error handling
 const OptimizedImage = ({ src, alt, className, ...props }) => {
