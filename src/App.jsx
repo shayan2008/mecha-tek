@@ -35,7 +35,7 @@ const awards = [
   '🥈 3rd Place, CETA Robotics IoT Challenge',
   '🥉 3rd Place, MOSSITO Robocup Innovation League (TeleSwitch)',
   '🥈 Silver Medal, Toronto Science Fair (MedPort)',
-  '🎓 SHAD Canada 2025 (Accepted, couldn't attend due to Brazil schedule)',
+  '🎓 SHAD Canada 2025 (Accepted, couldn\'t attend due to Brazil schedule)',
   '🌍 Qualified: RoboCup Junior International Brazil 2025 + FIRA World Korea 2025',
   '🥇 1st Place, North Region 4×100 Freestyle Relay',
   '🥉 3rd in 200m Backstroke, Division 1',
