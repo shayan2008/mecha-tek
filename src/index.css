@@ -16,20 +16,20 @@
   --text-secondary: #4b5563;
   --bg-primary: #ffffff;
   --bg-secondary: #f3f4f6;
-  --accent-primary: #38BDF8; /* Updated to accent-blue (Sky 400) */
-  --accent-secondary: #0EA5E9; /* Updated to Sky 500 (darker blue for hover) */
+  --accent-primary: #007BFF; /* blue-electric */
+  --accent-secondary: #39FF14; /* green-neon for hover */
   --border-color: #e5e7eb;
 }
 
 /* Dark theme */
 .dark {
-  --text-primary: #f3f4f6;
-  --text-secondary: #d1d5db;
-  --bg-primary: #111827;
-  --bg-secondary: #1f2937;
-  --accent-primary: #38BDF8; /* Updated to accent-blue (Sky 400) */
-  --accent-secondary: #0EA5E9; /* Updated to Sky 500 (darker blue for hover) */
-  --border-color: #374151;
+  --text-primary: #f3f4f6; /* Will be largely overridden by App.jsx text-text-light-primary */
+  --text-secondary: #d1d5db; /* Will be largely overridden by App.jsx text-text-light-secondary */
+  --bg-primary: #111827; /* Will be overridden by App.jsx bg-black-jet */
+  --bg-secondary: #1f2937; /* Previous secondary dark */
+  --accent-primary: #007BFF; /* blue-electric */
+  --accent-secondary: #39FF14; /* green-neon for hover */
+  --border-color: #374151; /* Previous border color */
 }
 
 * {

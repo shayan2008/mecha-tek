@@ -1,6 +1,6 @@
 import React from 'react';
 
-const awardsData = [
+const awardsData = [ // Assuming this data is still relevant and manually ordered for now
   '🏆 2× 1st Place, FIRA Robocup Canada (Team Captain)',
   '🥇 1st Place, Robocup USA Open - Simulation League (Team Captain)',
   '🥈 2nd Place, Robocup USA Open - SuperTeam Challenge (Team Captain)',
@@ -18,30 +18,6 @@ const awardsData = [
   '📜 Honour Roll - Consistently (90%+ Average)',
 ];
 
-const AwardsPage = () => {
-  return (
-    <section className="py-16 px-4 max-w-3xl mx-auto"> {/* Inherits bg-primary-dark */}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center text-accent-blue dark:text-accent-blue pb-4 mb-12 border-b-2 border-accent-green"> {/* Title styling */}
-        Awards & Achievements
-      </h2>
-
-      <div className="bg-primary-light dark:bg-secondary-dark shadow-xl rounded-lg p-6 md:p-8"> {/* Card background */}
-        <ul className="divide-y divide-secondary-light dark:divide-gray-700"> {/* Adjusted divider for light mode */}
-          {awardsData.map((award, index) => (
-            <li
-              key={index}
-              className="text-lg text-text-secondary-light dark:text-text-secondary-dark flex items-start py-4 first:pt-0 last:pb-0"
-            >
-              <span className="mr-4 text-xl text-yellow-500 transform scale-110 flex-shrink-0">{getEmoji(award)}</span> {/* Emoji color kept */}
-              <span className="leading-relaxed">{removeEmoji(award)}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-};
-
 // Helper function to extract emoji from the start of the string
 const getEmoji = (text) => {
   const match = text.match(/^(\p{Emoji_Presentation}|\p{Emoji_Modifier_Base}|\p{Emoji_Component}|[⭐🏆🥇🥈🥉🏅🎓🏊‍♂️🥏🧠📜])\s*/u);
@@ -50,7 +26,32 @@ const getEmoji = (text) => {
 
 // Helper function to remove emoji from the start of the string for cleaner text display
 const removeEmoji = (text) => {
-  return text.replace(/^(\p{Emoji_Presentation}|\p{Emoji_Modifier_Base}|\p{Emoji_Component}|[⭐🏆🥇🥈🥉🏅🎓🏊‍♂️🥏🧠📜])\s*/u, '');
+  return text.replace(/^(\p{Emoji_Presentation}|\p{Emoji_Modifier_Base}|\p{Emoji_Component}|[⭐🏆🥇🥈🥉🏅🎓🏊‍♂️🥏🧠📜])\s*/u, '').trim();
+};
+
+
+const AwardsPage = () => {
+  return (
+    <section id="awards-competitions" className="bg-black-jet text-text-light-primary py-16 sm:py-20 lg:py-24 px-4 md:px-6">
+      <div className="max-w-4xl mx-auto"> {/* Increased max-width slightly for better spacing if needed */}
+        <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-blue-electric text-center pb-4 mb-12 sm:mb-16 border-b-2 border-green-neon">
+          Awards & Competitions
+        </h2>
+
+        <ul className="space-y-4 sm:space-y-6">
+          {awardsData.map((award, index) => (
+            <li
+              key={index}
+              className="bg-dark-card p-4 sm:p-6 rounded-xl shadow-lg flex items-start transition-all duration-300 hover:shadow-green-neon/20 hover:scale-[1.02]"
+            >
+              <span className="text-3xl mr-4 text-green-neon flex-shrink-0 pt-1">{getEmoji(award)}</span>
+              <span className="text-text-light-secondary text-base sm:text-lg leading-relaxed">{removeEmoji(award)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
 };
 
 export default AwardsPage;

@@ -16,7 +16,7 @@ export default function App() {
   const [dark, setDark] = useState(false);
 
   return (
-    <div className={dark ? 'dark bg-primary-dark text-text-primary-dark' : 'bg-primary-light text-text-primary-light'}>
+    <div className={dark ? 'dark bg-black-jet text-text-light-primary' : 'bg-primary-light text-text-primary-light'}>
       <Header dark={dark} setDark={setDark} />
 
       {/* Routes */}
