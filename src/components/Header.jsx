@@ -1,8 +1,11 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import profile from '../assets/profile-placeholder.png'; // Assuming profile image is in src/assets
+import React, { useState, useEffect } from 'react';
+import { NavLink, Link } from 'react-router-dom'; // Added Link for CTA
+import { FaDownload, FaBars, FaSun, FaMoon, FaTimes } from 'react-icons/fa'; // Added FaTimes for mobile menu close
 
 const Header = ({ dark, setDark }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const navLinks = [
     { path: '/', name: 'Home' },
     { path: '/about', name: 'About Me' },
@@ -14,50 +17,120 @@ const Header = ({ dark, setDark }) => {
     { path: '/contact', name: 'Contact' },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50); // Trigger after 50px scroll
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  // Common classes for NavLinks
+  const navLinkClasses = ({ isActive }) =>
+    `px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black-jet ${
+      isActive
+      ? 'text-green-neon font-semibold focus:ring-green-neon'
+      : 'text-text-light-secondary hover:text-blue-electric focus:ring-blue-electric'
+    }`;
+
   return (
-    <nav className="sticky top-0 z-50 bg-primary-light/80 dark:bg-secondary-dark/80 backdrop-blur border-b border-secondary-light dark:border-gray-700 flex justify-between items-center px-6 py-3">
-      <div className="flex items-center gap-2 sm:gap-3">
-        <img src={profile} alt="Profile" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-accent-blue" /> {/* Used accent-blue for border */}
-        <span className="font-semibold sm:font-bold text-lg sm:text-xl text-text-primary-light dark:text-text-primary-dark">Shayan Doroudiani</span>
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ease-in-out
+        ${isScrolled || mobileMenuOpen ? 'bg-black-jet shadow-lg border-b border-bg-dark-card' : 'bg-transparent'}
+        ${isScrolled && !mobileMenuOpen ? 'py-3' : 'py-4'}`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo Area */}
+          <div className="flex-shrink-0">
+            <Link to="/" className="text-2xl font-bold text-blue-electric hover:text-green-neon transition-colors duration-300">
+              {/* Possible place for <img src="/logo.svg" alt="Logo" /> */}
+              Shayan D.
+            </Link>
+          </div>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-1 lg:space-x-2">
+              {navLinks.map(link => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className={navLinkClasses}
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+
+          {/* Right side: CTA, Dark Mode Toggle, Mobile Menu Button */}
+          <div className="flex items-center">
+            <a
+              href="/resume.pdf"
+              download="ShayanDoroudiani_Resume.pdf"
+              className="hidden sm:inline-flex items-center px-4 py-2 rounded-lg bg-blue-electric text-white text-sm font-semibold shadow-md hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-electric dark:focus:ring-offset-black-jet transition-all duration-300 ease-in-out mr-3"
+            >
+              <FaDownload className="mr-2" /> Resume
+            </a>
+            <button
+              onClick={() => setDark(!dark)}
+              className="p-2 rounded-full text-text-light-secondary hover:text-blue-electric focus:outline-none focus:ring-2 focus:ring-offset-1 dark:focus:ring-offset-black-jet focus:ring-blue-electric transition-colors duration-300"
+              aria-label="Toggle dark mode"
+            >
+              {dark ? <FaSun size={20} /> : <FaMoon size={20} />}
+            </button>
+            {/* Mobile menu button */}
+            <div className="md:hidden ml-2">
+              <button
+                onClick={toggleMobileMenu}
+                className="p-2 rounded-md text-text-light-secondary hover:text-blue-electric focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-electric"
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
+              >
+                {mobileMenuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      {/* Navigation Links - hidden on small screens, visible on medium and up */}
-      <div className="hidden md:flex items-center gap-1 md:gap-2 lg:gap-4 text-sm lg:text-base">
-        {navLinks.map(link => (
-          <NavLink
-            key={link.path}
-            to={link.path}
-            className={({ isActive }) =>
-              `px-3 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-green dark:focus:ring-offset-secondary-dark transition-colors duration-150 ease-in-out ${
-                isActive
-                ? 'text-accent-green dark:text-accent-green font-semibold'  // Active link
-                : 'text-text-primary-light dark:text-text-primary-dark hover:text-accent-blue dark:hover:text-accent-blue' // Inactive link
-              }`
-            }
-          >
-            {link.name}
-          </NavLink>
-        ))}
-      </div>
-      {/* Mobile Menu Button Placeholder - visible only on small screens */}
-      <div className="md:hidden flex items-center">
-        <button
-          onClick={() => alert("Mobile menu not implemented yet")} // Placeholder action
-          className="p-2 rounded-md text-text-secondary-light dark:text-text-secondary-dark hover:bg-secondary-light dark:hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-blue mr-2"
-          aria-label="Open main menu"
-        >
-          <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
-        </button>
-      </div>
-      <button
-        onClick={() => setDark(d => !d)}
-        className="p-2 rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-secondary-light dark:hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-blue dark:focus:ring-offset-secondary-dark"
-        aria-label="Toggle dark mode"
-      >
-        {dark ? '🌞' : '🌙'}
-      </button>
-    </nav>
+
+      {/* Mobile menu, show/hide based on mobileMenuOpen state */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-black-jet border-t border-bg-dark-card" id="mobile-menu">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navLinks.map(link => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  `block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
+                    isActive
+                    ? 'bg-bg-dark-card text-green-neon'
+                    : 'text-text-light-secondary hover:bg-bg-dark-card hover:text-blue-electric'
+                  }`
+                }
+                onClick={() => setMobileMenuOpen(false)} // Close menu on link click
+              >
+                {link.name}
+              </NavLink>
+            ))}
+            {/* CTA in mobile menu */}
+            <a
+              href="/resume.pdf"
+              download="ShayanDoroudiani_Resume.pdf"
+              className="block w-full text-center mt-2 px-4 py-2 rounded-lg bg-blue-electric text-white text-base font-semibold shadow-md hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-electric dark:focus:ring-offset-black-jet transition-all duration-300 ease-in-out"
+            >
+              <FaDownload className="inline mr-2" /> Resume
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 

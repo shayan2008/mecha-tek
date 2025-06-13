@@ -7,17 +7,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary-dark': '#0F172A',       // Dark Slate (background)
-        'secondary-dark': '#1E293B',   // Darker Slate (cards/secondary bg)
-        'text-primary-dark': '#E2E8F0',   // Lighter than CBD5E1, using Tailwind's slate-200
-        'text-secondary-dark': '#94A3B8', // Medium Slate Gray (Tailwind's slate-400)
-        'accent-green': '#34D399',       // Emerald 400
-        'accent-blue': '#38BDF8',        // Sky 400
-        // Adding light theme equivalents for consistency if we want to customize them later
+        'black-jet': '#0A0A0A',
+        'blue-electric': '#007BFF',
+        'green-neon': '#39FF14',
+        'text-light-primary': '#F0F0F0',
+        'text-light-secondary': '#A0A0A0',
+        'bg-dark-card': '#141414',
+        // Retaining light theme generic names for potential future use, but they can be removed if not needed
         'primary-light': '#FFFFFF',      // White
         'secondary-light': '#F1F5F9',    // Slate 100 (cards/secondary bg)
-        'text-primary-light': '#0F172A', // Dark Slate (matching primary-dark for text)
-        'text-secondary-light': '#475569',// Slate 600
+        'text-primary-light': '#0F172A', // Default dark text for light theme
+        'text-secondary-light': '#475569',// Default secondary dark text for light theme
       },
     },
   },

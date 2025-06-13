@@ -1,73 +1,102 @@
 import React from 'react';
-import { FaCode, FaRobot, FaUsers, FaBrain, FaMicrochip, FaSwimmer, FaLightbulb } from 'react-icons/fa';
-import { GiGearStickPattern } from "react-icons/gi"; // For Mechatronics
+import profilePlaceholder from '../assets/profile-placeholder.png'; // Assuming this is the placeholder
+import { FaMapMarkerAlt, FaBrain, FaGraduationCap, FaCode, FaRobot, FaUsers } from 'react-icons/fa';
 
-
-const getSkillIcon = (skill) => {
-  const lowerSkill = skill.toLowerCase();
-  if (lowerSkill.includes('robotics')) return <FaRobot className="mr-2" />;
-  if (lowerSkill.includes('ai') || lowerSkill.includes('machine learning')) return <FaBrain className="mr-2" />;
-  if (lowerSkill.includes('embedded') || lowerSkill.includes('stm32') || lowerSkill.includes('arduino') || lowerSkill.includes('esp32')) return <FaMicrochip className="mr-2" />;
-  if (lowerSkill.includes('mechatronics')) return <GiGearStickPattern className="mr-2" />;
-  if (lowerSkill.includes('programming') || lowerSkill.includes('python') || lowerSkill.includes('c++') || lowerSkill.includes('javascript') || lowerSkill.includes('ros')) return <FaCode className="mr-2" />;
-  if (lowerSkill.includes('leadership') || lowerSkill.includes('team management')) return <FaUsers className="mr-2" />;
-  if (lowerSkill.includes('swimming') || lowerSkill.includes('athletics')) return <FaSwimmer className="mr-2" />;
-  if (lowerSkill.includes('problem solving') || lowerSkill.includes('critical thinking')) return <FaLightbulb className="mr-2" />;
-  return <FaLightbulb className="mr-2" />; // Default icon
-};
+const primarySkillsData = [
+  { id: 1, icon: FaRobot, text: "Robotics & Mechatronics" },
+  { id: 2, icon: FaBrain, text: "AI & Machine Learning" },
+  { id: 3, icon: FaCode, text: "Full-Stack Development" },
+  { id: 4, icon: FaUsers, text: "Team Leadership" },
+];
 
 const AboutPage = () => {
-  // Skills array (optional, can be moved or managed globally later)
-  const skills = [
-    'Robotics (Design, CAD, Systems Integration)',
-    'AI & Machine Learning Applications',
-    'Embedded Systems (STM32, Arduino, ESP32)',
-    'Mechatronics & Electronics (Circuit Design, PCB, Soldering)',
-    'Programming (Python, C++, JavaScript, ROS)',
-    'Leadership & Team Management (Agile, Scrum)',
-    'Competitive Swimming & Athletics',
-    'Problem Solving & Critical Thinking',
-  ];
-
   return (
-    <section className="py-16 px-4 max-w-3xl mx-auto"> {/* Inherits bg-primary-dark */}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center text-accent-blue dark:text-accent-blue pb-4 mb-10 border-b-2 border-accent-green"> {/* Title styling */}
-        About Me
-      </h2>
+    <section
+      id="about-me"
+      className="bg-black-jet text-text-light-primary py-16 sm:py-20 lg:py-24 px-4 md:px-6"
+    >
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-blue-electric text-center pb-4 mb-12 sm:mb-16 border-b-2 border-green-neon">
+          About Me
+        </h2>
 
-      <div className="text-lg text-text-secondary-light dark:text-text-secondary-dark space-y-6 leading-relaxed">
-        <p>
-          Hi, I'm Shayan Doroudiani, a passionate and driven high school student from Toronto with a deep-rooted enthusiasm for robotics, artificial intelligence, and mechatronics. My journey into the world of STEM began early, fueled by a curiosity for how things work and a desire to create innovative solutions to real-world challenges.
-        </p>
-        <p>
-          Throughout my high school career, I've actively engaged in competitive robotics, leading teams in prestigious events like the FIRA RoboWorld Cup and RoboCup. These experiences have not only honed my technical skills in areas such as autonomous system design, embedded programming, and AI model integration but have also taught me the invaluable lessons of teamwork, perseverance, and leadership under pressure. I've had the privilege of captaining teams to national victories and international qualifications, a testament to our collective dedication and problem-solving abilities.
-        </p>
-        <p>
-          Beyond competitions, I'm committed to applying my skills to projects with tangible impact. From developing a smart pill dispenser (MedPort) that secured a silver medal at the Toronto Science Fair, to creating AI-driven tools for athletes, I continuously seek opportunities to innovate. My technical toolkit includes proficiency in Python, C++, ROS, CAD software, and various microcontroller platforms like STM32 and ESP32.
-        </p>
-        <p>
-          When I'm not immersed in circuits and code, I'm often found in the pool as a competitive swimmer or leading extracurricular activities that promote STEM education. I believe in a well-rounded approach to personal and professional growth, where discipline from sports complements the analytical rigor of engineering.
-        </p>
-        <p>
-          I am always eager to learn, collaborate, and contribute to projects that push the boundaries of technology. Feel free to explore my projects or get in touch!
-        </p>
-      </div>
+        <div className="grid md:grid-cols-3 gap-10 lg:gap-16 items-start">
+          {/* Left Column */}
+          <div className="md:col-span-1 space-y-6 text-center md:text-left sticky top-24"> {/* Sticky for desktop */}
+            {/* Profile Image */}
+            {/* TODO: Replace with your actual photo */}
+            <img
+              src={profilePlaceholder}
+              alt="Shayan Doroudiani"
+              className="rounded-xl shadow-xl w-full max-w-xs mx-auto md:mx-0 border-2 border-bg-dark-card"
+            />
+            <div className="px-2">
+              <h1 className="text-3xl font-bold text-green-neon mt-4">
+                Shayan Doroudiani
+              </h1>
+              <p className="text-text-light-secondary text-md mt-2 leading-relaxed">
+                Aspiring robotics engineer and AI enthusiast, driven by innovation and a passion for building impactful solutions.
+              </p>
+            </div>
+          </div>
 
-      {/* Optional Skills Section */}
-      <div className="mt-12">
-        <h3 className="text-2xl font-semibold mb-6 text-center text-accent-blue dark:text-accent-blue"> {/* Skills title styling */}
-          Core Skills
-        </h3>
-        <ul className="flex flex-wrap gap-3 justify-center">
-          {skills.map(skill => (
-            <li
-              key={skill}
-              className="bg-accent-green/20 dark:bg-accent-green/10 text-accent-green dark:text-accent-green px-4 py-2 rounded-full text-sm font-medium shadow-sm transition-transform duration-200 hover:scale-105 cursor-default flex items-center"
-            >
-              {getSkillIcon(skill)} {skill}
-            </li>
-          ))}
-        </ul>
+          {/* Right Column */}
+          <div className="md:col-span-2 space-y-10">
+            <div>
+              <h3 className="text-2xl sm:text-3xl font-semibold text-blue-electric mb-4">
+                My Journey
+              </h3>
+              <div className="text-text-light-secondary text-lg leading-relaxed space-y-5">
+                <p>
+                  From an early fascination with how things work to leading award-winning robotics teams, my journey has been one of relentless curiosity and hands-on creation. I thrive on transforming complex challenges into elegant technological solutions, particularly at the intersection of hardware and software.
+                </p>
+                <p>
+                  My experience spans designing autonomous robots for international competitions like FIRA and RoboCup, developing AI-driven applications for sports and healthcare, and diving deep into embedded systems. I'm passionate about sharing knowledge, leading teams, and constantly pushing the boundaries of what's possible in the tech landscape.
+                </p>
+                 <p>
+                  Currently seeking opportunities to contribute to innovative projects and collaborate with like-minded individuals who are passionate about shaping the future of technology.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-2xl sm:text-3xl font-semibold text-blue-electric mt-10 mb-6">
+                Quick Stats
+              </h3>
+              <dl className="space-y-4">
+                <div className="flex items-center">
+                  <dt className="w-1/3 font-semibold text-text-light-primary text-lg">Age:</dt>
+                  <dd className="w-2/3 text-text-light-secondary text-lg">18</dd>
+                </div>
+                <div className="flex items-center">
+                  <dt className="w-1/3 font-semibold text-text-light-primary text-lg"><FaMapMarkerAlt className="inline mr-2 text-green-neon" />Location:</dt>
+                  <dd className="w-2/3 text-text-light-secondary text-lg">Toronto, Canada</dd>
+                </div>
+                <div className="flex items-start">
+                  <dt className="w-1/3 font-semibold text-text-light-primary text-lg"><FaGraduationCap className="inline mr-2 text-green-neon" />Education:</dt>
+                  <dd className="w-2/3 text-text-light-secondary text-lg">Earl Haig Secondary School (Expected Graduation: June 2025)</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div>
+              <h3 className="text-2xl sm:text-3xl font-semibold text-blue-electric mt-10 mb-6">
+                Primary Skills
+              </h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {primarySkillsData.map(skill => {
+                  const SkillIcon = skill.icon;
+                  return (
+                    <li key={skill.id} className="bg-dark-card p-4 rounded-lg shadow-md flex items-center transition-all duration-300 hover:shadow-green-neon/20">
+                      <SkillIcon className="text-2xl text-green-neon mr-3 flex-shrink-0" />
+                      <span className="text-text-light-primary text-md">{skill.text}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

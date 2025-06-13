@@ -1,141 +1,162 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // For "View Details" button
 
-const projectsData = [
+// Sample Project Data (ensure image paths are correct for public/assets/images/)
+const initialProjectsData = [
   {
+    id: 'drc-explorer',
     title: 'DRC Explorer Robot',
-    description: 'Humanoid robot for disaster response; features mapping, terrain navigation, and sensor fusion. Gold at FIRA Robocup.',
-    image: '/assets/images/project-drc-explorer-robot.jpg',
-    category: ['Robotics', 'AI', 'Embedded Systems'],
-    icon: '🤖',
+    description: 'Humanoid robot for disaster response, featuring advanced mapping, terrain navigation, and sensor fusion. Achieved Gold at FIRA Robocup.',
+    image: '/assets/images/project-drc-explorer-robot.jpg', // Ensure this image exists
+    category: ['Robotics', 'AI', 'Embedded'],
+    tools: ['ROS', 'Python', 'C++', 'STM32', 'Computer Vision'],
+    detailsLink: '#/projects/drc-explorer', // Placeholder link
   },
   {
+    id: 'autonomous-car',
     title: 'Autonomous Car',
-    description: 'Line-following vehicle with obstacle avoidance, traffic light detection, and autonomous navigation logic.',
-    image: '/assets/images/project-autonomous-car.jpg',
-    category: ['Robotics', 'AI', 'Embedded Systems'],
-    icon: '🚗',
+    description: 'Line-following vehicle with obstacle avoidance, traffic light detection, and autonomous navigation logic using AI.',
+    image: '/assets/images/project-autonomous-car.jpg', // Ensure this image exists
+    category: ['Robotics', 'AI', 'Embedded'],
+    tools: ['Python', 'OpenCV', 'Raspberry Pi', 'Sensors'],
+    detailsLink: '#/projects/autonomous-car',
   },
   {
+    id: 'medport-dispenser',
     title: 'MedPort Smart Pill Dispenser',
-    description: 'Automated pill dispenser with scheduling, alerts, and remote tracking. Silver Medal, Toronto Science Fair.',
+    description: 'Automated pill dispenser with scheduling, alerts, and remote tracking. Winner of Silver Medal at Toronto Science Fair.',
     image: '/assets/images/project-medport-smart-pill-dispenser.jpg',
-    category: ['Embedded Systems', 'Healthcare', 'Software'],
-    icon: '💊',
+    category: ['Embedded', 'Software', 'Healthcare'],
+    tools: ['C++', 'Arduino', 'Firebase', 'Flutter'],
+    detailsLink: '#/projects/medport-dispenser',
   },
   {
+    id: 'rescue-simulation',
     title: 'Rescue Simulation (RoboCup)',
-    description: 'Led AI optimization & logic for virtual rescue agents in simulation. 1st & 2nd place internationally.',
+    description: 'Led AI optimization & logic for virtual rescue agents. Secured 1st & 2nd place internationally in simulation challenges.',
     image: '/assets/images/project-rescue-simulation-robocup.jpg',
     category: ['AI', 'Software', 'Simulation'],
-    icon: '🛰️',
+    tools: ['Python', 'AI Algorithms', 'ROS', 'Unity'],
+    detailsLink: '#/projects/rescue-simulation',
   },
   {
+    id: 'teleswitch-iot',
     title: 'TeleSwitch IoT Controller',
     description: 'Wi-Fi & SMS-controlled home automation switch for remote device management. 3rd Place, Mossito Innovation League.',
     image: '/assets/images/project-teleswitch-iot-controller.jpg',
-    category: ['Embedded Systems', 'IoT', 'Software'],
-    icon: '🔒',
+    category: ['Embedded', 'Software', 'IoT'],
+    tools: ['ESP32', 'C++', 'MQTT', 'Node.js'],
+    detailsLink: '#/projects/teleswitch-iot',
   },
   {
+    id: 'swimstroke-ai',
     title: 'SwimStroke AI',
-    description: 'AI-based feedback tool for competitive swimmers. Uses computer vision to analyze stroke efficiency and breathing patterns.',
+    description: 'AI tool for competitive swimmers, using computer vision to analyze stroke efficiency and breathing patterns for performance enhancement.',
     image: '/assets/images/project-swimstroke-ai.jpg',
     category: ['AI', 'Software', 'Sports Tech'],
-    icon: '🏊',
-  },
-  {
-    title: 'QuantBot Trading Simulator',
-    description: 'Python-based algorithmic trading simulator leveraging basic ML for market signal generation and backtesting strategies.',
-    image: '/assets/images/project-quantbot-trading-simulator.jpg',
-    category: ['Software', 'AI', 'Finance'],
-    icon: '📊',
-  },
-  {
-    title: 'Dual-Axis Solar Tracker',
-    description: 'Microcontroller-based system that orients a solar panel towards the sun to maximize energy capture efficiency.',
-    image: '/assets/images/project-dual-axis-solar-tracker.jpg',
-    category: ['Embedded Systems', 'Robotics', 'Energy'],
-    icon: '☀️',
+    tools: ['Python', 'OpenCV', 'TensorFlow', 'Flask'],
+    detailsLink: '#/projects/swimstroke-ai',
   },
 ];
 
-const filterCategories = ['All', 'Robotics', 'AI', 'Embedded Systems', 'Software', 'IoT', 'Healthcare', 'Sports Tech', 'Energy', 'Finance', 'Simulation'];
+const filterCategories = ['All', 'AI', 'Embedded', 'Robotics', 'Software', 'IoT', 'Healthcare', 'Sports Tech', 'Simulation']; // Expanded to cover example data
 
 const ProjectsPage = () => {
   const [selectedFilter, setSelectedFilter] = useState('All');
-  const [filteredProjects, setFilteredProjects] = useState(projectsData);
+  const [filteredProjects, setFilteredProjects] = useState(initialProjectsData);
 
   useEffect(() => {
     if (selectedFilter === 'All') {
-      setFilteredProjects(projectsData);
+      setFilteredProjects(initialProjectsData);
     } else {
       setFilteredProjects(
-        projectsData.filter(project => project.category.includes(selectedFilter))
+        initialProjectsData.filter(project => project.category.includes(selectedFilter))
       );
     }
   }, [selectedFilter]);
 
+  // Helper to truncate description
+  const truncateDescription = (text, maxLength = 70) => {
+    if (text.length <= maxLength) return text;
+    const words = text.split(' ');
+    let truncated = '';
+    for (const word of words) {
+      if ((truncated + word + ' ').length > maxLength) break;
+      truncated += word + ' ';
+    }
+    return truncated.trim() + '...';
+  };
+
   return (
-    <section className="py-16 px-4 max-w-6xl mx-auto"> {/* Inherits bg-primary-dark */}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center text-accent-blue dark:text-accent-blue pb-4 mb-12 border-b-2 border-accent-green"> {/* Title styling */}
-        My Projects
-      </h2>
+    <section id="projects-page" className="bg-black-jet text-text-light-primary py-16 sm:py-20 lg:py-24 px-4 md:px-6">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-blue-electric text-center pb-4 mb-12 sm:mb-16 border-b-2 border-green-neon">
+          My Projects
+        </h2>
 
-      <div className="flex flex-wrap justify-center gap-2 mb-12">
-        {filterCategories.map(category => (
-          <button
-            key={category}
-            onClick={() => setSelectedFilter(category)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-primary-dark
-              ${selectedFilter === category
-                ? 'bg-accent-green text-primary-dark font-semibold shadow-md focus:ring-accent-green' // Active filter
-                : 'bg-secondary-light dark:bg-secondary-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-300 dark:hover:bg-primary-dark hover:text-text-primary-dark focus:ring-accent-green' // Inactive
-              }`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      {filteredProjects.length === 0 ? (
-        <p className="text-center text-xl text-gray-600 dark:text-gray-400">
-          No projects found for the selected filter.
-        </p>
-      ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map(project => (
-            <div
-              key={project.title}
-              className="bg-primary-light dark:bg-secondary-dark rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl dark:border dark:border-gray-700"
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
+          {filterCategories.map(category => (
+            <button
+              key={category}
+              onClick={() => setSelectedFilter(category)}
+              className={`px-5 py-2 rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black-jet transform hover:scale-105
+                ${selectedFilter === category
+                  ? 'bg-green-neon text-black-jet focus:ring-green-neon' // Active
+                  : 'bg-dark-card text-text-light-secondary hover:bg-blue-electric hover:text-white focus:ring-blue-electric' // Inactive
+                }`}
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-56 object-cover"
-              />
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 text-text-primary-light dark:text-text-primary-dark"> {/* Made responsive and bold */}
-                  {project.icon && <span className="mr-2">{project.icon}</span>}
-                  {project.title}
-                </h3>
-                <p className="text-text-secondary-light dark:text-text-secondary-dark mb-4 flex-grow leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="mt-auto pt-4">
-                  <p className="text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark opacity-75 mb-2 uppercase tracking-wider">Categories:</p> {/* Added opacity to label */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.category.map(cat => (
-                      <span key={cat} className="bg-accent-blue/20 dark:bg-accent-blue/10 text-accent-blue dark:text-accent-blue px-2.5 py-1 text-xs font-semibold rounded-full shadow-sm"> {/* Using accent-blue for category tags */}
-                        {cat}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+              {category}
+            </button>
           ))}
         </div>
-      )}
+
+        {/* Projects Grid */}
+        {filteredProjects.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+            {filteredProjects.map(project => (
+              <div
+                key={project.id}
+                className="bg-dark-card rounded-xl shadow-xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-green-neon/30 hover:scale-[1.02]"
+              >
+                <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold text-blue-electric mb-3"> {/* Increased mb slightly */}
+                    {project.title}
+                  </h3>
+                  <p className="text-text-light-secondary text-sm leading-relaxed mb-4 flex-grow">
+                    {truncateDescription(project.description, 100)} {/* Max 100 chars */}
+                  </p>
+
+                  {project.tools && project.tools.length > 0 && (
+                    <div className="mb-5"> {/* Increased mb slightly */}
+                      <h4 className="text-xs font-semibold text-text-light-secondary uppercase tracking-wider mb-2">
+                        Tools & Technologies
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tools.map(tool => (
+                          <span key={tool} className="bg-green-neon/10 text-green-neon text-xs px-2.5 py-1 rounded-full">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <Link
+                    to={project.detailsLink}
+                    className="mt-auto bg-blue-electric text-white text-center text-sm font-semibold py-2.5 px-4 rounded-lg hover:bg-opacity-80 self-start transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-card focus:ring-blue-electric"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-text-light-secondary text-xl">No projects found for "{selectedFilter}". Try another category!</p>
+        )}
+      </div>
     </section>
   );
 };

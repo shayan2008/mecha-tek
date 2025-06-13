@@ -1,44 +1,69 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaDownload, FaProjectDiagram, FaEnvelope } from 'react-icons/fa';
+import { FaDownload, FaProjectDiagram, FaTrophy, FaLaptopCode, FaUsers, FaGlobeAmericas } from 'react-icons/fa';
+
+const highlightsData = [
+  { id: 1, icon: FaTrophy, text: "15+ Awards in Robotics & Science" },
+  { id: 2, icon: FaLaptopCode, text: "10+ Major Technical Projects" },
+  { id: 3, icon: FaUsers, text: "Led Teams in AI & Embedded Systems" },
+  { id: 4, icon: FaGlobeAmericas, text: "Competed Internationally" },
+];
 
 const HomePage = () => {
-  const commonButtonStyles = "px-6 py-3 rounded-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-primary-dark transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 inline-flex items-center justify-center";
-
   return (
-    <section className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] text-center py-12 sm:py-20 px-4 bg-gradient-to-b from-blue-100 dark:from-primary-dark via-transparent to-transparent">
-      <div className="max-w-4xl">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary-light dark:text-text-primary-dark pb-4 mb-8 border-b-2 border-accent-green">
+    <> {/* Using React Fragment to wrap multiple sections */}
+      <section
+        id="hero"
+        className="min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 bg-black-jet"
+      >
+        {/* TODO: Replace with video background component */}
+        {/* Optional: <div className="absolute inset-0 bg-gradient-to-b from-black-jet via-transparent to-black-jet opacity-50"></div> */}
+
+        <div className="relative z-10 py-12"> {/* Ensure content is above any potential video/overlay */}
+          <h1
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-electric to-green-neon"
+        >
           Shayan Doroudiani
         </h1>
-        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-10 text-accent-blue dark:text-accent-blue">
-          Robotics & AI Enthusiast | Inventor. Builder. Competitor. Leader.
-        </h2>
-      </div>
-      <div className="flex flex-wrap gap-4 sm:gap-6 justify-center mt-2">
-        <a
-          href="/resume.pdf"
-          download="ShayanDoroudiani_Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${commonButtonStyles} bg-accent-green text-primary-dark hover:bg-emerald-400 focus:ring-accent-green`}
-        >
-          <FaDownload className="mr-2" /> View Resume
-        </a>
-        <Link
-          to="/projects"
-          className={`${commonButtonStyles} border-2 border-accent-blue text-accent-blue hover:bg-accent-blue hover:text-text-primary-dark focus:ring-accent-blue`}
-        >
-          <FaProjectDiagram className="mr-2" /> Explore My Projects
-        </Link>
-        <Link
-          to="/contact"
-          className={`${commonButtonStyles} border-2 border-text-secondary-dark text-text-secondary-dark hover:bg-text-secondary-dark hover:text-text-primary-dark focus:ring-text-secondary-dark`}
-        >
-          <FaEnvelope className="mr-2" /> Contact Me
-        </Link>
+        <p className="mt-6 text-xl sm:text-2xl md:text-3xl text-text-light-secondary opacity-90 max-w-3xl mx-auto">
+          Inventor. Builder. Team Captain. Visionary.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6">
+          <a
+            href="/resume.pdf"
+            download="ShayanDoroudiani_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-3.5 border border-transparent text-base sm:text-lg font-semibold rounded-lg shadow-lg text-white bg-blue-electric hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black-jet focus:ring-blue-electric transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+            <FaDownload className="mr-2 sm:mr-3" /> View Resume
+          </a>
+          <Link
+            to="/projects"
+            className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-3.5 border-2 border-green-neon text-green-neon text-base sm:text-lg font-semibold rounded-lg shadow-lg hover:bg-green-neon hover:text-black-jet focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black-jet focus:ring-green-neon transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+            <FaProjectDiagram className="mr-2 sm:mr-3" /> Explore My Projects
+          </Link>
+        </div>
       </div>
     </section>
+
+    <section id="quick-highlights" className="py-16 sm:py-20 lg:py-24 bg-black-jet">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          {highlightsData.map(highlight => {
+            const IconComponent = highlight.icon; // Assign component to a variable starting with uppercase
+            return (
+              <div key={highlight.id} className="bg-dark-card p-6 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-green-neon/20">
+                <IconComponent className="text-6xl mb-5 text-green-neon mx-auto" />
+                <p className="text-lg font-semibold text-text-light-primary">{highlight.text}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+    </>
   );
 };
 
