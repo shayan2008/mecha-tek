@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom'; // Added Link
+import { FaGithub, FaLinkedin } from 'react-icons/fa'; // Added icon imports
 
 // Import Page Components
 import HomePage from './pages/HomePage';
