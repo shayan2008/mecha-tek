@@ -1,53 +1,59 @@
 import React, { useState, useEffect } from 'react';
 
-const galleryData = [
+// Sample Gallery Data (ensure image paths are correct for public/assets/images/)
+const initialGalleryData = [
   {
+    id: 'gallery-robocup-brazil',
     src: '/assets/images/gallery-robocup-brazil-qualifier.jpg',
     caption: 'RoboCup Brazil Qualifier - Rescue Simulation Team (2024)',
     tags: ['Robotics', 'Competition', 'AI', 'Simulation'],
   },
   {
+    id: 'gallery-fira-korea',
     src: '/assets/images/gallery-fira-korea-drc-explorer.jpg',
     caption: 'FIRA RoboWorld Cup Korea - DRC Explorer Robot (2024)',
     tags: ['Robotics', 'Competition', 'International'],
   },
   {
+    id: 'gallery-science-fair',
     src: '/assets/images/gallery-toronto-science-fair-medport.jpg',
     caption: 'Toronto Science Fair - MedPort Project Display (2023)',
-    tags: ['Innovation', 'Healthcare', 'Embedded Systems'],
+    tags: ['Innovation', 'Healthcare', 'Embedded'],
   },
   {
+    id: 'gallery-ceta-iot',
     src: '/assets/images/gallery-ceta-robotics-iot-challenge.jpg',
     caption: 'CETA Robotics Competition - IoT Challenge (2023)',
     tags: ['Robotics', 'IoT', 'Competition'],
   },
   {
+    id: 'gallery-line-follower',
     src: '/assets/images/gallery-autonomous-line-follower-prototype.jpg',
     caption: 'Autonomous Line Following Robot - Early Prototype (2022)',
-    tags: ['Robotics', 'Embedded Systems', 'Development'],
+    tags: ['Robotics', 'Embedded', 'Development'],
   },
   {
+    id: 'gallery-swim-meet',
     src: '/assets/images/gallery-ofsaa-regional-swim-meet.jpg',
     caption: 'OFSAA Regional Swim Meet - 200m Backstroke (2024)',
     tags: ['Sports', 'Swimming', 'Personal'],
   },
   {
+    id: 'gallery-teleswitch',
     src: '/assets/images/gallery-teleswitch-iot-project.jpg',
     caption: 'TeleSwitch - IoT Remote Control Project (2023)',
-    tags: ['IoT', 'Embedded Systems', 'Software'],
+    tags: ['IoT', 'Embedded', 'Software'],
   },
-  // Add more gallery items as needed
 ];
 
 const GalleryPage = () => {
   const [selectedTag, setSelectedTag] = useState('All');
-  const [filteredItems, setFilteredItems] = useState(galleryData);
+  const [filteredItems, setFilteredItems] = useState(initialGalleryData);
   const [uniqueTags, setUniqueTags] = useState(['All']);
 
   useEffect(() => {
-    // Extract all unique tags from galleryData
     const tags = new Set();
-    galleryData.forEach(item => {
+    initialGalleryData.forEach(item => {
       item.tags.forEach(tag => tags.add(tag));
     });
     setUniqueTags(['All', ...Array.from(tags).sort()]);
@@ -55,68 +61,75 @@ const GalleryPage = () => {
 
   useEffect(() => {
     if (selectedTag === 'All') {
-      setFilteredItems(galleryData);
+      setFilteredItems(initialGalleryData);
     } else {
       setFilteredItems(
-        galleryData.filter(item => item.tags.includes(selectedTag))
+        initialGalleryData.filter(item => item.tags.includes(selectedTag))
       );
     }
-  }, [selectedTag]);
+  }, [selectedTag, initialGalleryData]); // Added initialGalleryData to dependency array
 
   return (
-    <section className="py-16 px-4 max-w-6xl mx-auto"> {/* Inherits bg-primary-dark */}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center text-accent-blue dark:text-accent-blue pb-4 mb-12 border-b-2 border-accent-green"> {/* Title styling */}
-        Gallery
-      </h2>
+    <section id="gallery-page" className="bg-black-jet text-text-light-primary py-16 sm:py-20 lg:py-24 px-4 md:px-6">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-blue-electric text-center pb-4 mb-12 sm:mb-16 border-b-2 border-green-neon">
+          Gallery
+        </h2>
 
-      <div className="flex flex-wrap justify-center gap-2 mb-12">
-        {uniqueTags.map(tag => (
-          <button
-            key={tag}
-            onClick={() => setSelectedTag(tag)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-primary-dark
-              ${selectedTag === tag
-                ? 'bg-accent-green text-primary-dark font-semibold shadow-md focus:ring-accent-green' // Active filter
-                : 'bg-secondary-light dark:bg-secondary-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-300 dark:hover:bg-primary-dark hover:text-text-primary-dark focus:ring-accent-green' // Inactive
-              }`}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-
-      {filteredItems.length === 0 ? (
-         <p className="text-center text-xl text-gray-600 dark:text-gray-400">
-          No items match the selected filter. Try another category!
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredItems.map((item, index) => (
-            <div
-              key={index}
-              className="bg-primary-light dark:bg-secondary-dark rounded-xl shadow-lg overflow-hidden group transition-all duration-300 transform hover:scale-105 hover:shadow-2xl dark:border dark:border-gray-700"
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
+          {uniqueTags.map(tag => (
+            <button
+              key={tag}
+              onClick={() => setSelectedTag(tag)}
+              className={`px-5 py-2 rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black-jet transform hover:scale-105
+                ${selectedTag === tag
+                  ? 'bg-green-neon text-black-jet focus:ring-green-neon' // Active
+                  : 'bg-dark-card text-text-light-secondary hover:bg-blue-electric hover:text-white focus:ring-blue-electric' // Inactive
+                }`}
             >
-              <img
-                src={item.src}
-                alt={item.caption}
-                className="w-full h-64 object-cover" // Increased height for better visuals
-              />
-              <div className="p-6"> {/* Standardized padding */}
-                <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark group-hover:text-accent-blue dark:group-hover:text-accent-blue transition-colors">
-                  {item.caption}
-                </p>
-                <div className="mt-2">
-                  {item.tags.map(tag => (
-                    <span key={tag} className="inline-block bg-accent-green/20 dark:bg-accent-green/10 text-accent-green dark:text-accent-green px-2 py-1 text-xs font-semibold rounded-full mr-2 mb-1 shadow-sm"> {/* Using accent-green for tags */}
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+              {tag}
+            </button>
           ))}
         </div>
-      )}
+
+        {/* Gallery Grid */}
+        {filteredItems.length > 0 ? (
+          // TODO: Consider wrapping this grid div with <motion.div variants={staggerContainerVariants}> for staggered card appearance.
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {filteredItems.map((item, index) => ( // Added index for custom prop
+              // TODO: Wrap this card div with <motion.div variants={cardItemVariants} key={item.id} custom={index}>.
+              <div
+                key={item.id}
+                className="bg-dark-card rounded-xl shadow-lg overflow-hidden group relative transition-all duration-300 ease-in-out hover:shadow-blue-electric/30 hover:scale-[1.03] dark:border dark:border-gray-700" // Changed to rounded-xl
+              >
+                {/* TODO: Implement Lightbox functionality on image click */}
+                <img
+                  src={item.src}
+                  alt={item.caption}
+                  className="w-full h-60 object-cover cursor-pointer" // Added cursor-pointer for lightbox hint
+                />
+                <div className="absolute inset-0 bg-black-jet bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-300 flex flex-col justify-end p-4">
+                  <h3 className="text-text-light-primary font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                    {item.caption}
+                  </h3>
+                  {item.tags && item.tags.length > 0 && (
+                    <div className="mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
+                      {item.tags.map(tag => (
+                        <span key={tag} className="inline-block bg-green-neon/20 text-green-neon text-xs px-2 py-0.5 rounded-full mr-1 mb-1">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+           <p className="text-center text-text-light-secondary text-xl">No gallery items found for "{selectedTag}". Try another category!</p>
+        )}
+      </div>
     </section>
   );
 };

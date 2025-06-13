@@ -73,9 +73,11 @@ const LeadershipPage = () => {
         </h2>
 
         <div className="space-y-4">
-          {leadershipData.map((item) => {
+          {/* TODO: Consider wrapping this div with <motion.div variants={staggerContainerVariants}> if animating accordion items as a list. */}
+          {leadershipData.map((item, index) => { // Added index for custom prop
             const isOpen = openAccordion === item.id;
             return (
+              // TODO: Wrap this accordion item div with <motion.div variants={accordionItemVariants} key={item.id} custom={index}>.
               <div key={item.id} className="bg-dark-card rounded-xl shadow-xl overflow-hidden">
                 {/* Header/Button */}
                 <button
@@ -106,6 +108,7 @@ const LeadershipPage = () => {
 
                 {/* Content Area */}
                 {isOpen && (
+                  // TODO: Wrap this content div with <motion.div initial="hidden" animate="visible" exit="hidden" variants={accordionContentVariants}> for open/close animation.
                   <div
                     id={`accordion-content-${item.id}`}
                     className="p-4 sm:p-6 border-t border-text-light-secondary/20 bg-black-jet" // Content area on main bg, border for separation

@@ -60,8 +60,10 @@ const CertificatesPage = () => {
           Technical Certificates
         </h2>
 
+        {/* TODO: Consider wrapping this grid div with <motion.div variants={staggerContainerVariants}> for staggered tile appearance. */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {certificatesData.map((cert) => (
+          {certificatesData.map((cert, index) => ( // Added index for custom prop
+            // TODO: Wrap this tile div with <motion.div variants={tileItemVariants} key={cert.id} custom={index}>.
             <div
               key={cert.id}
               className="bg-dark-card rounded-xl shadow-xl p-6 flex flex-col items-center text-center transition-all duration-300 hover:shadow-blue-electric/30 hover:scale-[1.03]"
