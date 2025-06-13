@@ -113,8 +113,10 @@ const ProjectsPage = () => {
 
         {/* Projects Grid */}
         {filteredProjects.length > 0 ? (
+          // TODO: Consider wrapping this grid div with <motion.div variants={staggerContainerVariants}> for staggered card appearance.
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-            {filteredProjects.map(project => (
+            {filteredProjects.map((project, index) => ( // Added index for custom prop in Framer Motion
+              // TODO: Wrap this card div with <motion.div variants={cardItemVariants} key={project.id} custom={index}>.
               <div
                 key={project.id}
                 className="bg-dark-card rounded-xl shadow-xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-green-neon/30 hover:scale-[1.02]"

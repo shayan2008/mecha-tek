@@ -39,10 +39,12 @@ const AwardsPage = () => {
         </h2>
 
         <ul className="space-y-4 sm:space-y-6">
+          {/* TODO: Consider wrapping this ul with <motion.ul variants={staggerContainerVariants}> if animating list items. */}
           {awardsData.map((award, index) => (
+            // TODO: Wrap this li with <motion.li variants={listItemVariants} key={index} custom={index}> for staggered entrance.
             <li
               key={index}
-              className="bg-dark-card p-4 sm:p-6 rounded-xl shadow-lg flex items-start transition-all duration-300 hover:shadow-green-neon/20 hover:scale-[1.02]"
+              className="bg-dark-card p-4 sm:p-6 rounded-xl shadow-lg flex items-start transition-all duration-300 hover:shadow-green-neon/20 hover:scale-[1.02] dark:border dark:border-gray-700"
             >
               <span className="text-3xl mr-4 text-green-neon flex-shrink-0 pt-1">{getEmoji(award)}</span>
               <span className="text-text-light-secondary text-base sm:text-lg leading-relaxed">{removeEmoji(award)}</span>

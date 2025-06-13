@@ -20,14 +20,17 @@ const HomePage = () => {
         {/* Optional: <div className="absolute inset-0 bg-gradient-to-b from-black-jet via-transparent to-black-jet opacity-50"></div> */}
 
         <div className="relative z-10 py-12"> {/* Ensure content is above any potential video/overlay */}
+        {/* TODO: Animate h1 with <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}> */}
           <h1
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-electric to-green-neon"
         >
           Shayan Doroudiani
         </h1>
+        {/* TODO: Animate subtitle p with <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}> */}
         <p className="mt-6 text-xl sm:text-2xl md:text-3xl text-text-light-secondary opacity-90 max-w-3xl mx-auto">
           Inventor. Builder. Team Captain. Visionary.
         </p>
+        {/* TODO: Wrap button container with <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}> for staggered button appearance. */}
         <div className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6">
           <a
             href="/resume.pdf"
@@ -50,10 +53,12 @@ const HomePage = () => {
 
     <section id="quick-highlights" className="py-16 sm:py-20 lg:py-24 bg-black-jet">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* TODO: Wrap this grid with <motion.div variants={staggerContainerVariants}> for staggered animation of highlight cards. */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-          {highlightsData.map(highlight => {
+          {highlightsData.map((highlight, index) => {
             const IconComponent = highlight.icon; // Assign component to a variable starting with uppercase
             return (
+              // TODO: Wrap this card div with <motion.div variants={itemVariants} custom={index}> for individual animation.
               <div key={highlight.id} className="bg-dark-card p-6 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-green-neon/20">
                 <IconComponent className="text-6xl mb-5 text-green-neon mx-auto" />
                 <p className="text-lg font-semibold text-text-light-primary">{highlight.text}</p>
