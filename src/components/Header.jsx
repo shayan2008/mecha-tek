@@ -15,10 +15,10 @@ const Header = ({ dark, setDark }) => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-700 flex justify-between items-center px-6 py-3">
+    <nav className="sticky top-0 z-50 bg-primary-light/80 dark:bg-secondary-dark/80 backdrop-blur border-b border-secondary-light dark:border-gray-700 flex justify-between items-center px-6 py-3">
       <div className="flex items-center gap-2 sm:gap-3">
-        <img src={profile} alt="Profile" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-blue-600" />
-        <span className="font-semibold sm:font-bold text-lg sm:text-xl">Shayan Doroudiani</span>
+        <img src={profile} alt="Profile" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-accent-blue" /> {/* Used accent-blue for border */}
+        <span className="font-semibold sm:font-bold text-lg sm:text-xl text-text-primary-light dark:text-text-primary-dark">Shayan Doroudiani</span>
       </div>
       {/* Navigation Links - hidden on small screens, visible on medium and up */}
       <div className="hidden md:flex items-center gap-1 md:gap-2 lg:gap-4 text-sm lg:text-base">
@@ -27,10 +27,10 @@ const Header = ({ dark, setDark }) => {
             key={link.path}
             to={link.path}
             className={({ isActive }) =>
-              `px-3 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-900 hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-150 ease-in-out ${
+              `px-3 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-green dark:focus:ring-offset-secondary-dark transition-colors duration-150 ease-in-out ${
                 isActive
-                ? 'text-blue-700 dark:text-blue-400'
-                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                ? 'text-accent-green dark:text-accent-green font-semibold'  // Active link
+                : 'text-text-primary-light dark:text-text-primary-dark hover:text-accent-blue dark:hover:text-accent-blue' // Inactive link
               }`
             }
           >
@@ -40,10 +40,9 @@ const Header = ({ dark, setDark }) => {
       </div>
       {/* Mobile Menu Button Placeholder - visible only on small screens */}
       <div className="md:hidden flex items-center">
-        {/* Dark Mode Toggle is always visible, but we need a menu button too */}
         <button
           onClick={() => alert("Mobile menu not implemented yet")} // Placeholder action
-          className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 mr-2"
+          className="p-2 rounded-md text-text-secondary-light dark:text-text-secondary-dark hover:bg-secondary-light dark:hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-blue mr-2"
           aria-label="Open main menu"
         >
           <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -53,7 +52,7 @@ const Header = ({ dark, setDark }) => {
       </div>
       <button
         onClick={() => setDark(d => !d)}
-        className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-900"
+        className="p-2 rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-secondary-light dark:hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-blue dark:focus:ring-offset-secondary-dark"
         aria-label="Toggle dark mode"
       >
         {dark ? '🌞' : '🌙'}

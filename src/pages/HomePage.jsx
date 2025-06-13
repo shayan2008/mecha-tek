@@ -1,37 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaDownload, FaProjectDiagram, FaEnvelope } from 'react-icons/fa';
 
 const HomePage = () => {
+  const commonButtonStyles = "px-6 py-3 rounded-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-primary-dark transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 inline-flex items-center justify-center";
+
   return (
-    <section className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] text-center py-12 sm:py-20 px-4 bg-gradient-to-b from-blue-100 dark:from-gray-800 via-transparent to-transparent">
-      {/* Adjusted min-h to align with App.jsx main's pt-20 (5rem). Adjusted py for responsiveness. Enhanced gradient. */}
-      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-gray-900 dark:text-white">
-        Shayan Doroudiani
-      </h1>
-      <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-8 text-blue-700 dark:text-blue-400">
-        Robotics & AI Enthusiast | Inventor. Builder. Competitor. Leader.
-      </h2>
-      <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
+    <section className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] text-center py-12 sm:py-20 px-4 bg-gradient-to-b from-blue-100 dark:from-primary-dark via-transparent to-transparent">
+      <div className="max-w-4xl">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary-light dark:text-text-primary-dark pb-4 mb-8 border-b-2 border-accent-green">
+          Shayan Doroudiani
+        </h1>
+        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-10 text-accent-blue dark:text-accent-blue">
+          Robotics & AI Enthusiast | Inventor. Builder. Competitor. Leader.
+        </h2>
+      </div>
+      <div className="flex flex-wrap gap-4 sm:gap-6 justify-center mt-2">
         <a
           href="/resume.pdf"
-          download="ShayanDoroudiani_Resume.pdf" // Added download attribute with suggested filename
-          target="_blank" // Open in new tab (optional with download, but good fallback)
-          rel="noopener noreferrer" // Security best practice
-          className="px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-900 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+          download="ShayanDoroudiani_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${commonButtonStyles} bg-accent-green text-primary-dark hover:bg-emerald-400 focus:ring-accent-green`}
         >
-          View Resume
+          <FaDownload className="mr-2" /> View Resume
         </a>
         <Link
           to="/projects"
-          className="px-6 py-3 rounded-lg bg-green-500 text-white font-semibold shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:focus:ring-offset-gray-900 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+          className={`${commonButtonStyles} border-2 border-accent-blue text-accent-blue hover:bg-accent-blue hover:text-text-primary-dark focus:ring-accent-blue`}
         >
-          Explore Projects
+          <FaProjectDiagram className="mr-2" /> Explore My Projects
         </Link>
         <Link
           to="/contact"
-          className="px-6 py-3 rounded-lg bg-gray-700 text-white font-semibold shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 dark:focus:ring-offset-gray-900 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+          className={`${commonButtonStyles} border-2 border-text-secondary-dark text-text-secondary-dark hover:bg-text-secondary-dark hover:text-text-primary-dark focus:ring-text-secondary-dark`}
         >
-          Contact Me
+          <FaEnvelope className="mr-2" /> Contact Me
         </Link>
       </div>
     </section>

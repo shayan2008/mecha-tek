@@ -76,8 +76,8 @@ const ProjectsPage = () => {
   }, [selectedFilter]);
 
   return (
-    <section className="py-16 px-4 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold mb-12 text-center text-blue-700 dark:text-blue-400">
+    <section className="py-16 px-4 max-w-6xl mx-auto"> {/* Inherits bg-primary-dark */}
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center text-accent-blue dark:text-accent-blue pb-4 mb-12 border-b-2 border-accent-green"> {/* Title styling */}
         My Projects
       </h2>
 
@@ -86,10 +86,10 @@ const ProjectsPage = () => {
           <button
             key={category}
             onClick={() => setSelectedFilter(category)}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-primary-dark
               ${selectedFilter === category
-                ? 'bg-blue-600 text-white shadow-md focus:ring-blue-400'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:ring-blue-500'
+                ? 'bg-accent-green text-primary-dark font-semibold shadow-md focus:ring-accent-green' // Active filter
+                : 'bg-secondary-light dark:bg-secondary-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-300 dark:hover:bg-primary-dark hover:text-text-primary-dark focus:ring-accent-green' // Inactive
               }`}
           >
             {category}
@@ -106,7 +106,7 @@ const ProjectsPage = () => {
           {filteredProjects.map(project => (
             <div
               key={project.title}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl"
+              className="bg-primary-light dark:bg-secondary-dark rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl dark:border dark:border-gray-700"
             >
               <img
                 src={project.image}
@@ -114,18 +114,18 @@ const ProjectsPage = () => {
                 className="w-full h-56 object-cover"
               />
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 text-text-primary-light dark:text-text-primary-dark"> {/* Made responsive and bold */}
                   {project.icon && <span className="mr-2">{project.icon}</span>}
                   {project.title}
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4 flex-grow leading-relaxed">
+                <p className="text-text-secondary-light dark:text-text-secondary-dark mb-4 flex-grow leading-relaxed">
                   {project.description}
                 </p>
                 <div className="mt-auto pt-4">
-                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">Categories:</p>
+                  <p className="text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark opacity-75 mb-2 uppercase tracking-wider">Categories:</p> {/* Added opacity to label */}
                   <div className="flex flex-wrap gap-2">
                     {project.category.map(cat => (
-                      <span key={cat} className="bg-blue-100 dark:bg-gray-700 text-blue-700 dark:text-blue-300 px-2.5 py-1 text-xs font-semibold rounded-full shadow-sm">
+                      <span key={cat} className="bg-accent-blue/20 dark:bg-accent-blue/10 text-accent-blue dark:text-accent-blue px-2.5 py-1 text-xs font-semibold rounded-full shadow-sm"> {/* Using accent-blue for category tags */}
                         {cat}
                       </span>
                     ))}

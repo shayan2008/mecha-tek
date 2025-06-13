@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaBuilding, FaCalendarAlt } from 'react-icons/fa';
 
 const leadershipData = [
   {
@@ -29,8 +30,8 @@ const leadershipData = [
 
 const LeadershipPage = () => {
   return (
-    <section className="py-16 px-4 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-12 text-center text-blue-700 dark:text-blue-400">
+    <section className="py-16 px-4 max-w-4xl mx-auto"> {/* Inherits bg-primary-dark */}
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center text-accent-blue dark:text-accent-blue pb-4 mb-12 border-b-2 border-accent-green"> {/* Title styling */}
         Leadership & Extracurriculars
       </h2>
 
@@ -38,20 +39,20 @@ const LeadershipPage = () => {
         {leadershipData.map((role, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden p-6 md:p-8 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl focus-within:scale-105 focus-within:shadow-2xl"
+            className="bg-primary-light dark:bg-secondary-dark rounded-xl shadow-lg overflow-hidden p-6 md:p-8 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl focus-within:scale-105 focus-within:shadow-2xl dark:border dark:border-gray-700"
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            <h3 className="text-xl sm:text-2xl font-bold text-text-primary-light dark:text-text-primary-dark mb-1"> {/* Made responsive */}
               {role.title}
             </h3>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-              <p className="text-blue-600 dark:text-blue-400 font-semibold text-lg mb-1 sm:mb-0">
-                {role.org}
+              <p className="text-accent-blue dark:text-accent-blue font-semibold text-lg mb-1 sm:mb-0 flex items-center">
+                <FaBuilding className="mr-2 opacity-75" /> {role.org}
               </p>
-              <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                {role.date}
+              <p className="text-text-secondary-light dark:text-text-secondary-dark text-sm font-medium flex items-center">
+                <FaCalendarAlt className="mr-2 opacity-75" /> {role.date}
               </p>
             </div>
-            <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+            <p className="text-text-secondary-light dark:text-text-secondary-dark text-base leading-relaxed mt-1"> {/* Added mt-1 for slight space from date/org line */}
               {role.desc}
             </p>
           </div>
